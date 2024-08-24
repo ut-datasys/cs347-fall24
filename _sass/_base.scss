@@ -282,15 +282,28 @@ a.tosu {
         letter-spacing: 0.03em;
     }
 
+    .row-note {
+        color: #bf5700 
+    }
+
     .table-row {
         background-color: #ffffff;
         border-color: whitesmoke;
         border-width: 0.1em;
         border-style: solid;
         border-bottom: none;
+        height: 8px; /* Set the height of the row */
+    }
+
+    .table-row-lecture {
+        background-color: #ffffff;
     }
 
     .table-row-assignment {
+        background-color: #d9edf7;
+    }
+
+    .table-row-noclass {
         background-color: #d9edf7;
     }
 
