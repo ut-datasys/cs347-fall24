@@ -1,51 +1,61 @@
 #!/bin/bash
 
-# Read the TSV file
-input_file="input.tsv"
-counter=1
+# Initialize counters for each type
+lecture_count=1
+exam_count=1
+review_count=1
+noclass_count=1
 
-# Define the timezone offset and time
-timezone_offset="-05:00"
-time="14:00:00"
+# Function to convert date to the required format
+convert_date() {
+  input_date="$1"
+  formatted_date=$(date -j -f "%m/%d/%Y" "$input_date" +"%Y-%m-%dT14:00:00-05:00")
+  echo "$formatted_date"
+}
 
-# Use a while loop to read each line, parsing the TSV correctly
-while IFS=$'\t' read -r date topic note; do
-    # Remove any surrounding quotes from the fields
-    date=$(echo "$date" | sed 's/^"//;s/"$//')
-    topic=$(echo "$topic" | sed 's/^"//;s/"$//')
+# Read the TSV file and handle the last line
+{
+  while IFS=$'\t' read -r date topic note || [ -n "$date" ]; do
 
-    # Convert date to YYYY-MM-DD format
-    formatted_date=$(awk -F/ '{print $3"-"$1"-"$2}' <<< "$date")
-    
-    # Append the time and timezone offset
-    formatted_date_time="${formatted_date}T${time}${timezone_offset}"
-
-    # If the note field exists, clean it up
-    if [ -n "$note" ]; then
-        note=$(echo "$note" | sed 's/^"//;s/"$//')
+    # Determine the type based on the topic
+    if [[ $topic == Lecture* ]]; then
+      type="lecture"
+      filename="${type}_$(printf "%02d" $lecture_count).md"
+      ((lecture_count++))
+    elif [[ $topic == *[eE]xam* ]]; then
+      type="exam"
+      filename="${type}_$(printf "%02d" $exam_count).md"
+      ((exam_count++))
+    elif [[ $topic == *[rR]eview* ]]; then
+      type="review"
+      filename="${type}_$(printf "%02d" $review_count).md"
+      ((review_count++))
+    elif [[ $topic == *"No Class"* ]]; then
+      type="noclass"
+      filename="${type}_$(printf "%02d" $noclass_count).md"
+      ((noclass_count++))
+    else
+      echo "Skipping unknown type for topic: $topic"
+      continue
     fi
 
-    # Format the file number to two digits
-    file_number=$(printf "%02d" "$counter")
-    
-    # Create the filename
-    output_file="${file_number}.md"
-    
-    # Remove "Lecture" from the topic if it exists
-    formatted_topic=$(echo "$topic" | sed 's/^Lecture //')
-    
-    # Write the markdown content
-    echo "---" > "$output_file"
-    echo "type: lecture" >> "$output_file"
-    echo "date: \"$formatted_date_time\"" >> "$output_file"
-    echo "title: '$formatted_topic'" >> "$output_file"
-    echo "---" >> "$output_file"
-    
-    # Add the note if it exists
-    if [ -n "$note" ]; then
-        echo "$note" >> "$output_file"
+    # Convert date to YAML format with time appended
+    formatted_date=$(convert_date "$date")
+
+    # Clean the note field by removing carriage returns
+    clean_note=$(echo "$note" | tr -d '\r')
+
+    # Create the markdown file with the specified format
+    echo "---" > "$filename"
+    echo "type: \"$type\"" >> "$filename"
+    echo "date: \"$formatted_date\"" >> "$filename"
+    echo "topic: '$topic'" >> "$filename"
+    echo "---" >> "$filename"
+
+    # Add the note field if it exists
+    if [[ -n "$clean_note" ]]; then
+      echo "$clean_note" >> "$filename"
     fi
-    
-    # Increment the counter for the next file
-    counter=$((counter + 1))
-done < "$input_file"
+
+  done
+} < input.tsv

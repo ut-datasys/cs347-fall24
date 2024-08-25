@@ -1,9 +1,8 @@
-<div class="col col-1" style="color: #31708f ;font-weight: bold;" data-label="Event">Review</div>
-<div class="col col-1-2" data-label="Date">
+<div class="col col-1" data-label="Date">
     {{ include.event.date | date: site.dateformat }}
 </div>
 <div class="col col-4" data-label="Description">
-    {{ include.event.description }}
+    {{ include.event.topic }}
 </div>
 <div class="col col-2" data-label="Note">
 </div>
