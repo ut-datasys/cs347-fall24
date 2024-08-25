@@ -1,6 +1,7 @@
 ---
 layout: home
 ---
+# Course Introduction
 This course is an undergrad-level database system course. Its focus is introducing the internals of a database system. It does NOT cover how to build applications (like web applications) over database systems. Students are expected to understand the design of each database system component and get experience implementing a few key components in a pedagogical database system.
 
 This course assumes students have completed the following undergraduate-level courses: data structures, algorithms, and operating systems, or have equivalent knowledge.

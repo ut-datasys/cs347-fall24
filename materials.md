@@ -4,17 +4,17 @@ title: Materials
 permalink: /materials/
 ---
 
-{% include image.html url="/_images/cover2.jpg" width=175 align="right" %}
+{% include image.html url="/_images/db7-cover.jpg" width=175 align="right" %}
 
-## Book
+## Textbook
 
-Alan Turing and Noam Chomsky: Very Famous Book
+Students can use [Database System Concepts (Seventh Edition) 
+by Avi Silberschatz, Henry F. Korth, and S. Sudarshan](https://db-book.com/) as a reference book.
 
 ## Additional Course Materials
 
-* If you are not familiar with Python programming, use any online tutorial to get a handle of it.
-* [Material #1](http://www.example.com/): how a computer chess player thinks!
-* [Material #2](http://www.example.com/): how a computer chess player thinks!
-* [Material #3](http://www.example.com/): how a computer chess player thinks!
-* [Material #4](http://www.example.com/): how a computer chess player thinks!
-* [Material #5](http://www.example.com/): how a computer chess player thinks!
+[The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html#the-rust-programming-language) is a great resource for learning Rust.
+
+The lecture materials of this course are adapted from [CMU 15-445/645](https://15445.courses.cs.cmu.edu/fall2023/) with permissions.
+
+The course labs are taken from [UChicago CMSC 23500](https://classes.cs.uchicago.edu/archive/2023/spring/23500-1) with permissions.
