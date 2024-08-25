@@ -19,7 +19,7 @@ permalink: /logistics/
 
 - **Course Communication**: We use Ed Discussion for course-related communication.
 
-## 🛡️ Academic Integrity
+## 🛡️ Sharing of Course Materials and Academic Integrity
 
 - **Sharing of course materials is prohibited**: No materials used in this class may be shared online or with anyone without the instructor’s written permission. Students are also prohibited from sharing their solutions to the course labs with anyone, even after completing the course. Unauthorized sharing of materials will be reported to [Student Conduct and Academic Integrity](https://deanofstudents.utexas.edu/conduct/) in the Office of the Dean of Students.
 
